@@ -8,7 +8,7 @@ Licensed under the [MIT License](http://www.mit-license.org/)
 
 ## Building
 
-Depends on [ftdc2c_femas](http://github.com/shawn666liu/ftdc2c_femas). Clone ftdc2c_zqctp and build it first.
+Depends on [ftdc2c_femas](http://github.com/shawn666liu/ftdc2c_femas). Clone ftdc2c_femas and build it first.
 
 ## Binary
 
