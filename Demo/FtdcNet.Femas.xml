@@ -1,0 +1,4478 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FtdcNet.Femas</name>
+    </assembly>
+    <members>
+        <member name="T:Femas.EnumOnErrRtnType">
+            <summary>
+            所有的OnErrRtnXXXX回调事件
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOnErrRtnType.None">
+            <summary>
+            未使用,保留
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOnErrRtnType.OnErrRtnOrderInsert">
+             <summary>
+            报单录入错误回报, ThostFtdcInputOrderField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnErrRtnType.OnErrRtnOrderAction">
+             <summary>
+            报单操作错误回报, ThostFtdcOrderActionField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnErrRtnType.OnErrRtnQuoteInsert">
+             <summary>
+            报价录入错误回报, ThostFtdcInputQuoteField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnErrRtnType.OnErrRtnQuoteAction">
+             <summary>
+            报价撤单错误回报, ThostFtdcOrderActionField
+             </summary>
+        </member>
+        <member name="T:Femas.EnumOnFrontType">
+            <summary>
+            所有的OnFrontXXXX回调事件
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOnFrontType.None">
+            <summary>
+            未使用,保留
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOnFrontType.OnFrontConnected">
+             <summary>
+            当客户端与交易后台建立起通信连接时（还未登录前），该方法被调用。
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnFrontType.OnFrontDisconnected">
+             <summary>
+            当客户端与交易后台通信连接断开时，该方法被调用。当发生这个情况后，API会自动重新连接，客户端可不做处理。
+            @param nReason 错误原因
+                    0x1001 网络读失败
+                    0x1002 网络写失败
+                    0x2001 接收心跳超时
+                    0x2002 发送心跳失败
+                    0x2003 收到错误报文, int
+             </summary>
+        </member>
+        <member name="T:Femas.EnumOnPackageType">
+            <summary>
+            所有的OnPackageXXXX回调事件
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOnPackageType.None">
+            <summary>
+            未使用,保留
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOnPackageType.OnPackageStart">
+             <summary>
+            报文回调开始通知。当API收到一个报文后，首先调用本方法，然后是各数据域的回调，最后是报文回调结束通知。
+            @param nTopicID 主题代码（如私有流、公共流、行情流等）
+            @param nSequenceNo 报文序号, int
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnPackageType.OnPackageEnd">
+             <summary>
+            报文回调结束通知。当API收到一个报文后，首先调用报文回调开始通知，然后是各数据域的回调，最后调用本方法。
+            @param nTopicID 主题代码（如私有流、公共流、行情流等）
+            @param nSequenceNo 报文序号, int
+             </summary>
+        </member>
+        <member name="T:Femas.EnumOnRspType">
+            <summary>
+            所有的OnRspXXXX回调事件
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.None">
+            <summary>
+            未使用,保留
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspError">
+             <summary>
+            错误应答, ThostFtdcRspInfoField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspUserLogin">
+             <summary>
+            风控前置系统用户登录应答, ThostFtdcRspUserLoginField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspUserLogout">
+             <summary>
+            用户退出应答, ThostFtdcRspUserLogoutField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspSubscribeTopic">
+             <summary>
+            订阅主题应答, ThostFtdcDisseminationField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspQryTopic">
+             <summary>
+            主题查询应答, ThostFtdcDisseminationField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspSubMarketData">
+             <summary>
+            订阅合约的相关信息, ThostFtdcSpecificInstrumentField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspUnSubMarketData">
+             <summary>
+            退订合约的相关信息, ThostFtdcSpecificInstrumentField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspUserPasswordUpdate">
+             <summary>
+            用户密码修改应答, ThostFtdcUserPasswordUpdateField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspOrderInsert">
+             <summary>
+            报单录入应答, ThostFtdcInputOrderField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspOrderAction">
+             <summary>
+            报单操作应答, ThostFtdcOrderActionField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspQuoteInsert">
+             <summary>
+            报价录入应答, ThostFtdcInputQuoteField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspQuoteAction">
+             <summary>
+            报价操作应答, ThostFtdcQuoteActionField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspForQuote">
+             <summary>
+            询价请求应答, ThostFtdcReqForQuoteField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspMarginCombAction">
+             <summary>
+            客户申请组合应答, ThostFtdcInputMarginCombActionField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspUserDeposit">
+             <summary>
+            用户请求出入金应答, ThostFtdcstpUserDepositField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspTransferMoney">
+             <summary>
+            用户主次席出入金应答, ThostFtdcstpTransferMoneyField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspQryOrder">
+             <summary>
+            报单查询应答, ThostFtdcOrderField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspQryTrade">
+             <summary>
+            成交单查询应答, ThostFtdcTradeField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspQryUserInvestor">
+             <summary>
+            可用投资者账户查询应答, ThostFtdcRspUserInvestorField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspQryTradingCode">
+             <summary>
+            交易编码查询应答, ThostFtdcRspTradingCodeField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspQryInvestorAccount">
+             <summary>
+            投资者资金账户查询应答, ThostFtdcRspInvestorAccountField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspQryInstrument">
+             <summary>
+            合约查询应答, ThostFtdcRspInstrumentField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspQryExchange">
+             <summary>
+            交易所查询应答, ThostFtdcRspExchangeField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspQryInvestorPosition">
+             <summary>
+            投资者持仓查询应答, ThostFtdcRspInvestorPositionField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspQryComplianceParam">
+             <summary>
+            合规参数查询应答, ThostFtdcRspComplianceParamField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspQryInvestorFee">
+             <summary>
+            投资者手续费率查询应答, ThostFtdcInvestorFeeField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspQryInvestorMargin">
+             <summary>
+            投资者保证金率查询应答, ThostFtdcInvestorMarginField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspQryInvestorCombPosition">
+             <summary>
+            交易编码组合持仓查询应答, ThostFtdcRspInvestorCombPositionField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRspType.OnRspQryInvestorLegPosition">
+             <summary>
+            交易编码单腿持仓查询应答, ThostFtdcRspInvestorLegPositionField
+             </summary>
+        </member>
+        <member name="T:Femas.EnumOnRtnType">
+            <summary>
+            所有的OnRtnXXXX回调事件
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOnRtnType.None">
+            <summary>
+            未使用,保留
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOnRtnType.OnRtnDepthMarketData">
+             <summary>
+            深度行情通知, ThostFtdcDepthMarketDataField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRtnType.OnRtnFlowMessageCancel">
+             <summary>
+            数据流回退通知, ThostFtdcFlowMessageCancelField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRtnType.OnRtnTrade">
+             <summary>
+            成交回报, ThostFtdcTradeField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRtnType.OnRtnOrder">
+             <summary>
+            报单回报, ThostFtdcOrderField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRtnType.OnRtnInstrumentStatus">
+             <summary>
+            合约交易状态通知, ThostFtdcInstrumentStatusField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRtnType.OnRtnInvestorAccountDeposit">
+             <summary>
+            账户出入金回报, ThostFtdcInvestorAccountDepositResField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRtnType.OnRtnQuote">
+             <summary>
+            报价回报, ThostFtdcRtnQuoteField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRtnType.OnRtnForQuote">
+             <summary>
+            询价回报, ThostFtdcReqForQuoteField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRtnType.OnRtnMarginCombinationLeg">
+             <summary>
+            增加组合规则通知, ThostFtdcMarginCombinationLegField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRtnType.OnRtnMarginCombAction">
+             <summary>
+            客户申请组合确认, ThostFtdcInputMarginCombActionField
+             </summary>
+        </member>
+        <member name="F:Femas.EnumOnRtnType.OnRtnUserDeposit">
+             <summary>
+            用户请求出入金, ThostFtdcstpUserDepositField
+             </summary>
+        </member>
+        <member name="T:Femas.EnumTeResumeType">
+            <summary>
+            THOST_TE_RESUME_TYPE, 公共流重传方式
+            </summary>
+        </member>
+        <member name="T:Femas.EnumVolumeConditionType">
+            <summary>
+            TFtdcUstpVolumeConditionType是一个成交量类型类型
+            </summary>
+        </member>
+        <member name="F:Femas.EnumVolumeConditionType.AV">
+            <summary>
+            任何数量
+            </summary>
+        </member>
+        <member name="F:Femas.EnumVolumeConditionType.MV">
+            <summary>
+            最小数量
+            </summary>
+        </member>
+        <member name="F:Femas.EnumVolumeConditionType.CV">
+            <summary>
+            全部数量
+            </summary>
+        </member>
+        <member name="T:Femas.EnumForceCloseReasonType">
+            <summary>
+            TFtdcUstpForceCloseReasonType是一个强平原因类型
+            </summary>
+        </member>
+        <member name="F:Femas.EnumForceCloseReasonType.NotForceClose">
+            <summary>
+            非强平
+            </summary>
+        </member>
+        <member name="F:Femas.EnumForceCloseReasonType.LackDeposit">
+            <summary>
+            资金不足
+            </summary>
+        </member>
+        <member name="F:Femas.EnumForceCloseReasonType.ClientOverPositionLimit">
+            <summary>
+            客户超仓
+            </summary>
+        </member>
+        <member name="F:Femas.EnumForceCloseReasonType.MemberOverPositionLimit">
+            <summary>
+            会员超仓
+            </summary>
+        </member>
+        <member name="F:Femas.EnumForceCloseReasonType.NotMultiple">
+            <summary>
+            持仓非整数倍
+            </summary>
+        </member>
+        <member name="T:Femas.EnumInstrumentStatusType">
+            <summary>
+            TFtdcUstpInstrumentStatusType是一个合约交易状态类型
+            </summary>
+        </member>
+        <member name="F:Femas.EnumInstrumentStatusType.BeforeTrading">
+            <summary>
+            开盘前
+            </summary>
+        </member>
+        <member name="F:Femas.EnumInstrumentStatusType.NoTrading">
+            <summary>
+            非交易
+            </summary>
+        </member>
+        <member name="F:Femas.EnumInstrumentStatusType.Continous">
+            <summary>
+            连续交易
+            </summary>
+        </member>
+        <member name="F:Femas.EnumInstrumentStatusType.AuctionOrdering">
+            <summary>
+            集合竞价报单
+            </summary>
+        </member>
+        <member name="F:Femas.EnumInstrumentStatusType.AuctionBalance">
+            <summary>
+            集合竞价价格平衡
+            </summary>
+        </member>
+        <member name="F:Femas.EnumInstrumentStatusType.AuctionMatch">
+            <summary>
+            集合竞价撮合
+            </summary>
+        </member>
+        <member name="F:Femas.EnumInstrumentStatusType.Closed">
+            <summary>
+            收盘
+            </summary>
+        </member>
+        <member name="T:Femas.EnumOffsetFlagType">
+            <summary>
+            TFtdcUstpOffsetFlagType是一个开平标志类型
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOffsetFlagType.Open">
+            <summary>
+            开仓
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOffsetFlagType.Close">
+            <summary>
+            平仓
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOffsetFlagType.ForceClose">
+            <summary>
+            强平
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOffsetFlagType.CloseToday">
+            <summary>
+            平今
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOffsetFlagType.CloseYesterday">
+            <summary>
+            平昨
+            </summary>
+        </member>
+        <member name="T:Femas.EnumOrderPriceTypeType">
+            <summary>
+            TFtdcUstpOrderPriceTypeType是一个报单价格条件类型
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOrderPriceTypeType.AnyPrice">
+            <summary>
+            任意价
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOrderPriceTypeType.LimitPrice">
+            <summary>
+            限价
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOrderPriceTypeType.BestPrice">
+            <summary>
+            最优价
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOrderPriceTypeType.FiveLevelPrice">
+            <summary>
+            五档价
+            </summary>
+        </member>
+        <member name="T:Femas.EnumOrderStatusType">
+            <summary>
+            TFtdcUstpOrderStatusType是一个报单状态类型
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOrderStatusType.AllTraded">
+            <summary>
+            全部成交
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOrderStatusType.PartTradedQueueing">
+            <summary>
+            部分成交还在队列中
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOrderStatusType.PartTradedNotQueueing">
+            <summary>
+            部分成交不在队列中
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOrderStatusType.NoTradeQueueing">
+            <summary>
+            未成交还在队列中
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOrderStatusType.NoTradeNotQueueing">
+            <summary>
+            未成交不在队列中
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOrderStatusType.Canceled">
+            <summary>
+            撤单
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOrderStatusType.AcceptedNoReply">
+            <summary>
+            订单已报入交易所未应答
+            </summary>
+        </member>
+        <member name="T:Femas.EnumUserTypeType">
+            <summary>
+            TFtdcUstpUserTypeType是一个用户类型类型
+            </summary>
+        </member>
+        <member name="F:Femas.EnumUserTypeType.Person">
+            <summary>
+            自然人
+            </summary>
+        </member>
+        <member name="F:Femas.EnumUserTypeType.Product">
+            <summary>
+            理财产品
+            </summary>
+        </member>
+        <member name="F:Femas.EnumUserTypeType.Manager">
+            <summary>
+            期货公司管理员
+            </summary>
+        </member>
+        <member name="F:Femas.EnumUserTypeType.Seat">
+            <summary>
+            席位
+            </summary>
+        </member>
+        <member name="T:Femas.EnumTradingRightType">
+            <summary>
+            TFtdcUstpTradingRightType是一个交易权限类型
+            </summary>
+        </member>
+        <member name="F:Femas.EnumTradingRightType.Allow">
+            <summary>
+            可以交易
+            </summary>
+        </member>
+        <member name="F:Femas.EnumTradingRightType.CloseOnly">
+            <summary>
+            只能平仓
+            </summary>
+        </member>
+        <member name="F:Femas.EnumTradingRightType.Forbidden">
+            <summary>
+            不能交易
+            </summary>
+        </member>
+        <member name="T:Femas.EnumTimeConditionType">
+            <summary>
+            TFtdcUstpTimeConditionType是一个有效期类型类型
+            </summary>
+        </member>
+        <member name="F:Femas.EnumTimeConditionType.IOC">
+            <summary>
+            立即完成，否则撤销
+            </summary>
+        </member>
+        <member name="F:Femas.EnumTimeConditionType.GFS">
+            <summary>
+            本节有效
+            </summary>
+        </member>
+        <member name="F:Femas.EnumTimeConditionType.GFD">
+            <summary>
+            当日有效
+            </summary>
+        </member>
+        <member name="F:Femas.EnumTimeConditionType.GTD">
+            <summary>
+            指定日期前有效
+            </summary>
+        </member>
+        <member name="F:Femas.EnumTimeConditionType.GTC">
+            <summary>
+            撤销前有效
+            </summary>
+        </member>
+        <member name="F:Femas.EnumTimeConditionType.GFA">
+            <summary>
+            集合竞价有效
+            </summary>
+        </member>
+        <member name="T:Femas.EnumOrderSourceType">
+            <summary>
+            TFtdcUstpOrderSourceType是一个报单来源类型
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOrderSourceType.Participant">
+            <summary>
+            来自参与者
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOrderSourceType.Administrator">
+            <summary>
+            来自管理员
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOrderSourceType.QuoteSplit">
+            <summary>
+            报价单拆分出来的买单或卖单
+            </summary>
+        </member>
+        <member name="T:Femas.EnumDirectionType">
+            <summary>
+            TFtdcUstpDirectionType是一个买卖方向类型
+            </summary>
+        </member>
+        <member name="F:Femas.EnumDirectionType.Buy">
+            <summary>
+            买
+            </summary>
+        </member>
+        <member name="F:Femas.EnumDirectionType.Sell">
+            <summary>
+            卖
+            </summary>
+        </member>
+        <member name="T:Femas.EnumCurrencyType">
+            <summary>
+            TFtdcUstpCurrencyType是一个币种类型
+            </summary>
+        </member>
+        <member name="F:Femas.EnumCurrencyType.RMB">
+            <summary>
+            人民币
+            </summary>
+        </member>
+        <member name="F:Femas.EnumCurrencyType.UDOLLAR">
+            <summary>
+            美元
+            </summary>
+        </member>
+        <member name="T:Femas.EnumAccountDirectionType">
+            <summary>
+            TFtdcUstpAccountDirectionType是一个出入金方向类型
+            </summary>
+        </member>
+        <member name="F:Femas.EnumAccountDirectionType.In">
+            <summary>
+            入金
+            </summary>
+        </member>
+        <member name="F:Femas.EnumAccountDirectionType.Out">
+            <summary>
+            出金
+            </summary>
+        </member>
+        <member name="T:Femas.EnumHedgeFlagType">
+            <summary>
+            TFtdcUstpHedgeFlagType是一个投机套保标志类型
+            </summary>
+        </member>
+        <member name="F:Femas.EnumHedgeFlagType.Speculation">
+            <summary>
+            投机
+            </summary>
+        </member>
+        <member name="F:Femas.EnumHedgeFlagType.Arbitrage">
+            <summary>
+            套利
+            </summary>
+        </member>
+        <member name="F:Femas.EnumHedgeFlagType.Hedge">
+            <summary>
+            套保
+            </summary>
+        </member>
+        <member name="F:Femas.EnumHedgeFlagType.MarketMaker">
+            <summary>
+            做市商
+            </summary>
+        </member>
+        <member name="F:Femas.EnumHedgeFlagType.AllValue">
+            <summary>
+            匹配所有的值
+            </summary>
+        </member>
+        <member name="T:Femas.EnumActionFlagType">
+            <summary>
+            TFtdcUstpActionFlagType是一个操作标志类型
+            </summary>
+        </member>
+        <member name="F:Femas.EnumActionFlagType.Delete">
+            <summary>
+            删除
+            </summary>
+        </member>
+        <member name="F:Femas.EnumActionFlagType.Suspend">
+            <summary>
+            挂起
+            </summary>
+        </member>
+        <member name="F:Femas.EnumActionFlagType.Active">
+            <summary>
+            激活
+            </summary>
+        </member>
+        <member name="F:Femas.EnumActionFlagType.Modify">
+            <summary>
+            修改
+            </summary>
+        </member>
+        <member name="T:Femas.EnumPositionTypeType">
+            <summary>
+            TFtdcUstpPositionTypeType是一个持仓类型类型
+            </summary>
+        </member>
+        <member name="F:Femas.EnumPositionTypeType.Net">
+            <summary>
+            净持仓
+            </summary>
+        </member>
+        <member name="F:Femas.EnumPositionTypeType.Gross">
+            <summary>
+            综合持仓
+            </summary>
+        </member>
+        <member name="T:Femas.EnumOptionsTypeType">
+            <summary>
+            TFtdcUstpOptionsTypeType是一个期权类型类型
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOptionsTypeType.NotOptions">
+            <summary>
+            非期权
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOptionsTypeType.CallOptions">
+            <summary>
+            看涨
+            </summary>
+        </member>
+        <member name="F:Femas.EnumOptionsTypeType.PutOptions">
+            <summary>
+            看跌
+            </summary>
+        </member>
+        <member name="T:Femas.EnumIsActiveType">
+            <summary>
+            TFtdcUstpIsActiveType是一个是否活跃类型
+            </summary>
+        </member>
+        <member name="F:Femas.EnumIsActiveType.NoActive">
+            <summary>
+            不活跃
+            </summary>
+        </member>
+        <member name="F:Femas.EnumIsActiveType.Active">
+            <summary>
+            活跃
+            </summary>
+        </member>
+        <member name="T:Femas.EnumGrantFuncSetType">
+            <summary>
+            TFtdcUstpGrantFuncSetType是一个授权功能号类型
+            </summary>
+        </member>
+        <member name="F:Femas.EnumGrantFuncSetType.Trading">
+            <summary>
+            正常交易
+            </summary>
+        </member>
+        <member name="F:Femas.EnumGrantFuncSetType.CloseOnly">
+            <summary>
+            只能平仓
+            </summary>
+        </member>
+        <member name="F:Femas.EnumGrantFuncSetType.CanotTrade">
+            <summary>
+            禁止交易
+            </summary>
+        </member>
+        <member name="T:Femas.EnumQuoteStatusType">
+            <summary>
+            TFtdcUstpQuoteStatusType是一个报价单状态类型类型
+            </summary>
+        </member>
+        <member name="F:Femas.EnumQuoteStatusType.Inited_InFEMAS">
+            <summary>
+            在飞马中还未进入交易系统
+            </summary>
+        </member>
+        <member name="F:Femas.EnumQuoteStatusType.Accepted_InTradingSystem">
+            <summary>
+            已经报入交易系统中
+            </summary>
+        </member>
+        <member name="F:Femas.EnumQuoteStatusType.Canceled_SingleLeg">
+            <summary>
+            已经撤掉单腿
+            </summary>
+        </member>
+        <member name="F:Femas.EnumQuoteStatusType.Canceled_All">
+            <summary>
+            已经全部撤掉
+            </summary>
+        </member>
+        <member name="F:Femas.EnumQuoteStatusType.Traded_SingleLeg">
+            <summary>
+            已经有单腿成交
+            </summary>
+        </member>
+        <member name="F:Femas.EnumQuoteStatusType.Traded_All">
+            <summary>
+            已经全部成交
+            </summary>
+        </member>
+        <member name="F:Femas.EnumQuoteStatusType.Error_QuoteAction">
+            <summary>
+            错误的撤消报价请求
+            </summary>
+        </member>
+        <member name="T:Femas.EnumCombDirectionType">
+            <summary>
+            TFtdcUstpCombDirectionType是一个申请保证金组合指令方向类型
+            </summary>
+        </member>
+        <member name="F:Femas.EnumCombDirectionType.Combine">
+            <summary>
+            申请组合
+            </summary>
+        </member>
+        <member name="F:Femas.EnumCombDirectionType.UnCombine">
+            <summary>
+            申请拆分组合
+            </summary>
+        </member>
+        <member name="P:Femas.OnErrRtnEventArgs.Param">
+            <summary>
+             不要用 Param != null 判断非空，需要 Param != IntPtr.Zero
+            </summary>
+        </member>
+        <member name="P:Femas.OnRspEventArgs.Param">
+            <summary>
+             不要用 Param != null 判断非空，需要 Param != IntPtr.Zero
+            </summary>
+        </member>
+        <member name="P:Femas.OnRtnEventArgs.Param">
+            <summary>
+             不要用 Param != null 判断非空，需要 Param != IntPtr.Zero
+            </summary>
+        </member>
+        <member name="T:Femas.FtdcMdAdapter">
+            <summary>
+            行情接口
+            </summary>
+        </member>
+        <member name="M:Femas.FtdcMdAdapter.#ctor(System.String)">
+             <summary>
+            创建MduserApi
+            @param pszFlowPath 存贮订阅信息文件的目录，默认为当前目录
+            @return 创建出的UserApi
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcMdAdapter.GetVersion(System.Int32@,System.Int32@)">
+             <summary>
+            获取系统版本号
+            @param nMajorVersion 主版本号
+            @param nMinorVersion 子版本号
+            @return 系统标识字符串
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcMdAdapter.Release">
+             <summary>
+            删除接口对象本身
+            @remark 不再使用本接口对象时,调用该函数删除接口对象
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcMdAdapter.Init">
+             <summary>
+            初始化
+            @remark 初始化运行环境,只有调用后,接口才开始工作
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcMdAdapter.GetTradingDay">
+             <summary>
+            获取当前交易日
+            @retrun 获取到的交易日
+            @remark 只有登录成功后,才能得到正确的交易日
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcMdAdapter.RegisterFront(System.String)">
+             <summary>
+            注册前置机网络地址
+            @param pszFrontAddress：前置机网络地址。
+            @remark 网络地址的格式为：“protocol://ipaddress:port”，如：”tcp://127.0.0.1:17001”。
+            @remark “tcp”代表传输协议，“127.0.0.1”代表服务器地址。”17001”代表服务器端口号。
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcMdAdapter.RegisterNameServer(System.String)">
+             <summary>
+            注册名字服务器网络地址
+            @param pszNsAddress：名字服务器网络地址。
+            @remark 网络地址的格式为：“protocol://ipaddress:port”，如：”tcp://127.0.0.1:12001”。
+            @remark “tcp”代表传输协议，“127.0.0.1”代表服务器地址。”12001”代表服务器端口号。
+            @remark RegisterFront优先于RegisterNameServer
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcMdAdapter.RegisterCertificateFile(System.String,System.String,System.String,System.String)">
+             <summary>
+            加载证书
+            @param pszCertFileName 用户证书文件名
+            @param pszKeyFileName 用户私钥文件名
+            @param pszCaFileName 可信任CA证书文件名
+            @param pszKeyFilePassword 用户私钥文件密码
+            @return 0 操作成功
+            @return -1 可信任CA证书载入失败
+            @return -2 用户证书载入失败
+            @return -3 用户私钥载入失败
+            @return -4 用户证书校验失败
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcMdAdapter.SubscribeMarketDataTopic(System.Int32,Femas.EnumTeResumeType)">
+             <summary>
+            订阅市场行情。
+            @param nTopicID 市场行情主题
+            @param nResumeType 市场行情重传方式
+                    USTP_TERT_RESTART:从本交易日开始重传
+                    USTP_TERT_RESUME:从上次收到的续传(非订阅全部合约时，不支持续传模式)
+                    USTP_TERT_QUICK:先传送当前行情快照,再传送登录后市场行情的内容
+            @remark 该方法要在Init方法前调用。若不调用则不会收到私有流的数据。
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcMdAdapter.SubscribeMarketData(System.String[])">
+             <summary>
+            订阅合约行情。
+            @param ppInstrumentID 合约ID
+            @param nCount 要订阅/退订行情的合约个数
+            @remark
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcMdAdapter.UnSubscribeMarketData(System.String[])">
+             <summary>
+            退订合约行情。
+            @param ppInstrumentID 合约ID
+            @param nCount 要订阅/退订行情的合约个数
+            @remark
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcMdAdapter.SetHeartbeatTimeout(System.UInt32)">
+             <summary>
+            设置心跳超时时间。
+            @param timeout 心跳超时时间(秒)
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcMdAdapter.ReqUserLogin(Femas.ThostFtdcReqUserLoginField,System.Int32)">
+             <summary>
+            风控前置系统用户登录请求
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcMdAdapter.ReqUserLogout(Femas.ThostFtdcReqUserLogoutField,System.Int32)">
+             <summary>
+            用户退出请求
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcMdAdapter.ReqSubscribeTopic(Femas.ThostFtdcDisseminationField,System.Int32)">
+             <summary>
+            订阅主题请求
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcMdAdapter.ReqQryTopic(Femas.ThostFtdcDisseminationField,System.Int32)">
+             <summary>
+            主题查询请求
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcMdAdapter.ReqSubMarketData(Femas.ThostFtdcSpecificInstrumentField,System.Int32)">
+             <summary>
+            订阅合约的相关信息
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcMdAdapter.ReqUnSubMarketData(Femas.ThostFtdcSpecificInstrumentField,System.Int32)">
+             <summary>
+            退订合约的相关信息
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcMdAdapter.CbOnFrontFunc(System.IntPtr,Femas.EnumOnFrontType,System.Int32)">
+            <summary>
+            处理所有的OnFront****回调事件
+            </summary>
+        </member>
+        <member name="M:Femas.FtdcMdAdapter.CbOnPackageFunc(System.IntPtr,Femas.EnumOnPackageType,System.Int32,System.Int32)">
+            <summary>
+            处理所有的OnPackage****回调事件
+            </summary>
+        </member>
+        <member name="M:Femas.FtdcMdAdapter.CbOnRspFunc(System.IntPtr,Femas.EnumOnRspType,System.IntPtr,Femas.ThostFtdcRspInfoField,System.Int32,System.Boolean)">
+            <summary>
+            处理所有的OnRsp****回调事件
+            </summary>
+        </member>
+        <member name="M:Femas.FtdcMdAdapter.CbOnRtnFunc(System.IntPtr,Femas.EnumOnRtnType,System.IntPtr)">
+            <summary>
+            处理所有的OnRtn****回调事件
+            </summary>
+        </member>
+        <member name="P:Femas.FtdcMdAdapter.Handle">
+            <summary>
+            Native Object Pointer
+            </summary>
+        </member>
+        <member name="E:Femas.FtdcMdAdapter.OnFrontEvent">
+            <summary>
+            处理所有的OnFront****回调事件
+            </summary>
+        </member>
+        <member name="E:Femas.FtdcMdAdapter.OnPackageEvent">
+            <summary>
+            处理所有的OnPackage****回调事件
+            </summary>
+        </member>
+        <member name="E:Femas.FtdcMdAdapter.OnRspEvent">
+            <summary>
+            处理所有的OnRsp****回调事件
+            </summary>
+        </member>
+        <member name="E:Femas.FtdcMdAdapter.OnRtnEvent">
+            <summary>
+            处理所有的OnRtn****回调事件
+            </summary>
+        </member>
+        <member name="T:Femas.Conv">
+            <summary>
+            Convert Native Ftdc struct ptr to Managed object
+            </summary>
+        </member>
+        <member name="M:Femas.Conv.P2S``1(System.IntPtr)">
+            <summary>
+            Marshal IntPtr to Struct/Class 
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcReqUserLoginField">
+            <summary>
+            系统用户登录请求
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcReqUserLoginField.TradingDay">
+            <summary>
+            交易日
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcReqUserLoginField.UserID">
+            <summary>
+            交易用户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcReqUserLoginField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcReqUserLoginField.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcReqUserLoginField.UserProductInfo">
+            <summary>
+            用户端产品信息
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcReqUserLoginField.InterfaceProductInfo">
+            <summary>
+            接口端产品信息
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcReqUserLoginField.ProtocolInfo">
+            <summary>
+            协议信息
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcReqUserLoginField.IPAddress">
+            <summary>
+            IP地址
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcReqUserLoginField.MacAddress">
+            <summary>
+            Mac地址
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcReqUserLoginField.DataCenterID">
+            <summary>
+            数据中心代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcReqUserLoginField.UserProductFileSize">
+            <summary>
+            客户端运行文件大小
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcRspUserLoginField">
+            <summary>
+            系统用户登录应答
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspUserLoginField.TradingDay">
+            <summary>
+            交易日
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspUserLoginField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspUserLoginField.UserID">
+            <summary>
+            交易用户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspUserLoginField.LoginTime">
+            <summary>
+            登录成功时间
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspUserLoginField.MaxOrderLocalID">
+            <summary>
+            用户最大本地报单号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspUserLoginField.TradingSystemName">
+            <summary>
+            交易系统名称
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspUserLoginField.DataCenterID">
+            <summary>
+            数据中心代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspUserLoginField.PrivateFlowSize">
+            <summary>
+            会员私有流当前长度
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspUserLoginField.UserFlowSize">
+            <summary>
+            交易员私有流当前长度
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcReqUserLogoutField">
+            <summary>
+            用户登出请求
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcReqUserLogoutField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcReqUserLogoutField.UserID">
+            <summary>
+            交易用户代码
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcRspUserLogoutField">
+            <summary>
+            用户登出响应
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspUserLogoutField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspUserLogoutField.UserID">
+            <summary>
+            交易用户代码
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcForceUserExitField">
+            <summary>
+            强制用户退出
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcForceUserExitField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcForceUserExitField.UserID">
+            <summary>
+            交易用户代码
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcUserPasswordUpdateField">
+            <summary>
+            用户口令修改
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcUserPasswordUpdateField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcUserPasswordUpdateField.UserID">
+            <summary>
+            交易用户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcUserPasswordUpdateField.OldPassword">
+            <summary>
+            旧密码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcUserPasswordUpdateField.NewPassword">
+            <summary>
+            新密码
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcInputOrderField">
+            <summary>
+            输入报单
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputOrderField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputOrderField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputOrderField.OrderSysID">
+            <summary>
+            系统报单编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputOrderField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputOrderField.UserID">
+            <summary>
+            用户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputOrderField.SeatNo">
+            <summary>
+            指定通过此席位序号下单
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputOrderField.InstrumentID">
+            <summary>
+            合约代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputOrderField.UserOrderLocalID">
+            <summary>
+            用户本地报单号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputOrderField.OrderPriceType">
+            <summary>
+            报单类型
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputOrderField.Direction">
+            <summary>
+            买卖方向
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputOrderField.OffsetFlag">
+            <summary>
+            开平标志
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputOrderField.HedgeFlag">
+            <summary>
+            投机套保标志
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputOrderField.LimitPrice">
+            <summary>
+            价格
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputOrderField.Volume">
+            <summary>
+            数量
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputOrderField.TimeCondition">
+            <summary>
+            有效期类型
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputOrderField.GTDDate">
+            <summary>
+            GTD日期
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputOrderField.VolumeCondition">
+            <summary>
+            成交量类型
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputOrderField.MinVolume">
+            <summary>
+            最小成交量
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputOrderField.StopPrice">
+            <summary>
+            止损价
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputOrderField.ForceCloseReason">
+            <summary>
+            强平原因
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputOrderField.IsAutoSuspend">
+            <summary>
+            自动挂起标志
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputOrderField.BusinessUnit">
+            <summary>
+            业务单元
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputOrderField.UserCustom">
+            <summary>
+            用户自定义域
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcOrderActionField">
+            <summary>
+            报单操作
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderActionField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderActionField.OrderSysID">
+            <summary>
+            报单编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderActionField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderActionField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderActionField.UserID">
+            <summary>
+            用户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderActionField.UserOrderActionLocalID">
+            <summary>
+            本次撤单操作的本地编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderActionField.UserOrderLocalID">
+            <summary>
+            被撤订单的本地报单编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderActionField.ActionFlag">
+            <summary>
+            报单操作标志
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderActionField.LimitPrice">
+            <summary>
+            价格
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderActionField.VolumeChange">
+            <summary>
+            数量变化
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcMemDbField">
+            <summary>
+            内存表导出
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMemDbField.MemTableName">
+            <summary>
+            内存表名
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcstpUserDepositField">
+            <summary>
+            用户请求出入金
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcstpUserDepositField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcstpUserDepositField.UserID">
+            <summary>
+            用户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcstpUserDepositField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcstpUserDepositField.Amount">
+            <summary>
+            金额
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcstpUserDepositField.AmountDirection">
+            <summary>
+            出入金方向
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcstpUserDepositField.UserOrderLocalID">
+            <summary>
+            用户本地报单号
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcstpTransferMoneyField">
+            <summary>
+            用户主次席出入金
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcstpTransferMoneyField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcstpTransferMoneyField.UserID">
+            <summary>
+            用户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcstpTransferMoneyField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcstpTransferMoneyField.Amount">
+            <summary>
+            金额
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcstpTransferMoneyField.AmountDirection">
+            <summary>
+            出入金方向
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcstpTransferMoneyField.UserOrderLocalID">
+            <summary>
+            用户本地报单号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcstpTransferMoneyField.BankID">
+            <summary>
+            银行机构代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcstpTransferMoneyField.BankPasswd">
+            <summary>
+            银行转账密码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcstpTransferMoneyField.AccountPasswd">
+            <summary>
+            主席转账密码
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcRspInfoField">
+            <summary>
+            响应信息
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInfoField.ErrorID">
+            <summary>
+            错误代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInfoField.ErrorMsg">
+            <summary>
+            错误信息
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcQryOrderField">
+            <summary>
+            报单查询
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryOrderField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryOrderField.UserID">
+            <summary>
+            用户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryOrderField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryOrderField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryOrderField.OrderSysID">
+            <summary>
+            报单编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryOrderField.InstrumentID">
+            <summary>
+            合约代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryOrderField.OrderStatus">
+            <summary>
+            报单状态
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcQryTradeField">
+            <summary>
+            成交查询
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryTradeField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryTradeField.UserID">
+            <summary>
+            用户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryTradeField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryTradeField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryTradeField.TradeID">
+            <summary>
+            成交编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryTradeField.InstrumentID">
+            <summary>
+            合约代码
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcQryInstrumentField">
+            <summary>
+            合约查询
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInstrumentField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInstrumentField.ProductID">
+            <summary>
+            产品代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInstrumentField.InstrumentID">
+            <summary>
+            合约代码
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcRspInstrumentField">
+            <summary>
+            合约查询应答
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.ProductID">
+            <summary>
+            品种代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.ProductName">
+            <summary>
+            品种名称
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.InstrumentID">
+            <summary>
+            合约代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.InstrumentName">
+            <summary>
+            合约名称
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.DeliveryYear">
+            <summary>
+            交割年份
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.DeliveryMonth">
+            <summary>
+            交割月
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.MaxLimitOrderVolume">
+            <summary>
+            限价单最大下单量
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.MinLimitOrderVolume">
+            <summary>
+            限价单最小下单量
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.MaxMarketOrderVolume">
+            <summary>
+            市价单最大下单量
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.MinMarketOrderVolume">
+            <summary>
+            市价单最小下单量
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.VolumeMultiple">
+            <summary>
+            数量乘数
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.PriceTick">
+            <summary>
+            报价单位
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.Currency">
+            <summary>
+            币种
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.LongPosLimit">
+            <summary>
+            多头限仓
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.ShortPosLimit">
+            <summary>
+            空头限仓
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.LowerLimitPrice">
+            <summary>
+            跌停板价
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.UpperLimitPrice">
+            <summary>
+            涨停板价
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.PreSettlementPrice">
+            <summary>
+            昨结算
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.InstrumentStatus">
+            <summary>
+            合约交易状态
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.CreateDate">
+            <summary>
+            创建日
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.OpenDate">
+            <summary>
+            上市日
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.ExpireDate">
+            <summary>
+            到期日
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.StartDelivDate">
+            <summary>
+            开始交割日
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.EndDelivDate">
+            <summary>
+            最后交割日
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.BasisPrice">
+            <summary>
+            挂牌基准价
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.IsTrading">
+            <summary>
+            当前是否交易
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.UnderlyingInstrID">
+            <summary>
+            基础商品代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.UnderlyingMultiple">
+            <summary>
+            基础商品乘数
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.PositionType">
+            <summary>
+            持仓类型
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.StrikePrice">
+            <summary>
+            执行价
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInstrumentField.OptionsType">
+            <summary>
+            期权类型
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcInstrumentStatusField">
+            <summary>
+            合约状态
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.ProductID">
+            <summary>
+            品种代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.ProductName">
+            <summary>
+            品种名称
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.InstrumentID">
+            <summary>
+            合约代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.InstrumentName">
+            <summary>
+            合约名称
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.DeliveryYear">
+            <summary>
+            交割年份
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.DeliveryMonth">
+            <summary>
+            交割月
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.MaxLimitOrderVolume">
+            <summary>
+            限价单最大下单量
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.MinLimitOrderVolume">
+            <summary>
+            限价单最小下单量
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.MaxMarketOrderVolume">
+            <summary>
+            市价单最大下单量
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.MinMarketOrderVolume">
+            <summary>
+            市价单最小下单量
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.VolumeMultiple">
+            <summary>
+            数量乘数
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.PriceTick">
+            <summary>
+            报价单位
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.Currency">
+            <summary>
+            币种
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.LongPosLimit">
+            <summary>
+            多头限仓
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.ShortPosLimit">
+            <summary>
+            空头限仓
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.LowerLimitPrice">
+            <summary>
+            跌停板价
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.UpperLimitPrice">
+            <summary>
+            涨停板价
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.PreSettlementPrice">
+            <summary>
+            昨结算
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.InstrumentStatus">
+            <summary>
+            合约交易状态
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.CreateDate">
+            <summary>
+            创建日
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.OpenDate">
+            <summary>
+            上市日
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.ExpireDate">
+            <summary>
+            到期日
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.StartDelivDate">
+            <summary>
+            开始交割日
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.EndDelivDate">
+            <summary>
+            最后交割日
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.BasisPrice">
+            <summary>
+            挂牌基准价
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.IsTrading">
+            <summary>
+            当前是否交易
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.UnderlyingInstrID">
+            <summary>
+            基础商品代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.UnderlyingMultiple">
+            <summary>
+            基础商品乘数
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.PositionType">
+            <summary>
+            持仓类型
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.StrikePrice">
+            <summary>
+            执行价
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInstrumentStatusField.OptionsType">
+            <summary>
+            期权类型
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcQryInvestorAccountField">
+            <summary>
+            投资者资金查询
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInvestorAccountField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInvestorAccountField.UserID">
+            <summary>
+            用户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInvestorAccountField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcRspInvestorAccountField">
+            <summary>
+            投资者资金应答
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorAccountField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorAccountField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorAccountField.AccountID">
+            <summary>
+            资金帐号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorAccountField.PreBalance">
+            <summary>
+            上次结算准备金
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorAccountField.Deposit">
+            <summary>
+            入金金额
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorAccountField.Withdraw">
+            <summary>
+            出金金额
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorAccountField.FrozenMargin">
+            <summary>
+            冻结的保证金
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorAccountField.FrozenFee">
+            <summary>
+            冻结手续费
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorAccountField.FrozenPremium">
+            <summary>
+            冻结权利金
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorAccountField.Fee">
+            <summary>
+            手续费
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorAccountField.CloseProfit">
+            <summary>
+            平仓盈亏
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorAccountField.PositionProfit">
+            <summary>
+            持仓盈亏
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorAccountField.Available">
+            <summary>
+            可用资金
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorAccountField.LongFrozenMargin">
+            <summary>
+            多头冻结的保证金
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorAccountField.ShortFrozenMargin">
+            <summary>
+            空头冻结的保证金
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorAccountField.LongMargin">
+            <summary>
+            多头占用保证金
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorAccountField.ShortMargin">
+            <summary>
+            空头占用保证金
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorAccountField.ReleaseMargin">
+            <summary>
+            当日释放保证金
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorAccountField.DynamicRights">
+            <summary>
+            动态权益
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorAccountField.TodayInOut">
+            <summary>
+            今日出入金
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorAccountField.Margin">
+            <summary>
+            占用保证金
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorAccountField.Premium">
+            <summary>
+            期权权利金收支
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorAccountField.Risk">
+            <summary>
+            风险度
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcQryUserInvestorField">
+            <summary>
+            可用投资者查询
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryUserInvestorField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryUserInvestorField.UserID">
+            <summary>
+            用户代码
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcRspUserInvestorField">
+            <summary>
+            可用投资者
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspUserInvestorField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspUserInvestorField.UserID">
+            <summary>
+            交易用户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspUserInvestorField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcQryTradingCodeField">
+            <summary>
+            交易编码查询
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryTradingCodeField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryTradingCodeField.UserID">
+            <summary>
+            用户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryTradingCodeField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryTradingCodeField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcRspTradingCodeField">
+            <summary>
+            交易编码查询
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspTradingCodeField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspTradingCodeField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspTradingCodeField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspTradingCodeField.ClientID">
+            <summary>
+            客户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspTradingCodeField.ClientRight">
+            <summary>
+            客户代码权限
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspTradingCodeField.IsActive">
+            <summary>
+            是否活跃
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcQryExchangeField">
+            <summary>
+            交易所查询请求
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryExchangeField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcRspExchangeField">
+            <summary>
+            交易所查询应答
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspExchangeField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspExchangeField.ExchangeName">
+            <summary>
+            交易所名称
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcQryInvestorPositionField">
+            <summary>
+            投资者持仓查询请求
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInvestorPositionField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInvestorPositionField.UserID">
+            <summary>
+            用户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInvestorPositionField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInvestorPositionField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInvestorPositionField.InstrumentID">
+            <summary>
+            合约代码
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcRspInvestorPositionField">
+            <summary>
+            投资者持仓查询应答
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorPositionField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorPositionField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorPositionField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorPositionField.ClientID">
+            <summary>
+            客户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorPositionField.InstrumentID">
+            <summary>
+            合约代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorPositionField.Direction">
+            <summary>
+            买卖方向
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorPositionField.HedgeFlag">
+            <summary>
+            投机套保标志
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorPositionField.UsedMargin">
+            <summary>
+            占用保证金
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorPositionField.Position">
+            <summary>
+            今持仓量
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorPositionField.PositionCost">
+            <summary>
+            今日持仓成本
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorPositionField.YdPosition">
+            <summary>
+            昨持仓量
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorPositionField.YdPositionCost">
+            <summary>
+            昨日持仓成本
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorPositionField.FrozenMargin">
+            <summary>
+            冻结的保证金
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorPositionField.FrozenPosition">
+            <summary>
+            开仓冻结持仓
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorPositionField.FrozenClosing">
+            <summary>
+            平仓冻结持仓
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorPositionField.FrozenPremium">
+            <summary>
+            冻结的权利金
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorPositionField.LastTradeID">
+            <summary>
+            最后一笔成交编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorPositionField.LastOrderLocalID">
+            <summary>
+            最后一笔本地报单编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorPositionField.Currency">
+            <summary>
+            币种
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcQryComplianceParamField">
+            <summary>
+            合规参数查询请求
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryComplianceParamField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryComplianceParamField.UserID">
+            <summary>
+            用户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryComplianceParamField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryComplianceParamField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcRspComplianceParamField">
+            <summary>
+            合规参数查询应答
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspComplianceParamField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspComplianceParamField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspComplianceParamField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspComplianceParamField.ClientID">
+            <summary>
+            客户号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspComplianceParamField.DailyMaxOrder">
+            <summary>
+            每日最大报单笔
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspComplianceParamField.DailyMaxOrderAction">
+            <summary>
+            每日最大撤单笔
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspComplianceParamField.DailyMaxErrorOrder">
+            <summary>
+            每日最大错单笔
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspComplianceParamField.DailyMaxOrderVolume">
+            <summary>
+            每日最大报单手
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspComplianceParamField.DailyMaxOrderActionVolume">
+            <summary>
+            每日最大撤单手
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcQryUserField">
+            <summary>
+            用户查询
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryUserField.StartUserID">
+            <summary>
+            交易用户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryUserField.EndUserID">
+            <summary>
+            交易用户代码
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcUserField">
+            <summary>
+            用户
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcUserField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcUserField.UserID">
+            <summary>
+            用户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcUserField.Password">
+            <summary>
+            用户登录密码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcUserField.IsActive">
+            <summary>
+            是否活跃
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcUserField.UserName">
+            <summary>
+            用户名称
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcUserField.UserType">
+            <summary>
+            用户类型
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcUserField.Department">
+            <summary>
+            营业部
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcUserField.GrantFuncSet">
+            <summary>
+            授权功能集
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcUserField.SetUserID">
+            <summary>
+            修改用户编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcUserField.CommandDate">
+            <summary>
+            操作日期
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcUserField.CommandTime">
+            <summary>
+            操作时间
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcQryInvestorFeeField">
+            <summary>
+            投资者手续费率查询
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInvestorFeeField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInvestorFeeField.UserID">
+            <summary>
+            用户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInvestorFeeField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInvestorFeeField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInvestorFeeField.InstrumentID">
+            <summary>
+            合约代码
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcInvestorFeeField">
+            <summary>
+            投资者手续费率
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorFeeField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorFeeField.ClientID">
+            <summary>
+            客户号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorFeeField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorFeeField.InstrumentID">
+            <summary>
+            合约代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorFeeField.ProductID">
+            <summary>
+            品种代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorFeeField.OpenFeeRate">
+            <summary>
+            开仓手续费按比例
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorFeeField.OpenFeeAmt">
+            <summary>
+            开仓手续费按手数
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorFeeField.OffsetFeeRate">
+            <summary>
+            平仓手续费按比例
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorFeeField.OffsetFeeAmt">
+            <summary>
+            平仓手续费按手数
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorFeeField.OTFeeRate">
+            <summary>
+            平今仓手续费按比例
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorFeeField.OTFeeAmt">
+            <summary>
+            平今仓手续费按手数
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorFeeField.PerOrderAmt">
+            <summary>
+            每笔订单收取的申报费
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorFeeField.PerCancelAmt">
+            <summary>
+            每笔撤单收取的申报费
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcQryInvestorMarginField">
+            <summary>
+            投资者保证金率查询
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInvestorMarginField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInvestorMarginField.UserID">
+            <summary>
+            用户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInvestorMarginField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInvestorMarginField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInvestorMarginField.InstrumentID">
+            <summary>
+            合约代码
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcInvestorMarginField">
+            <summary>
+            投资者保证金率
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorMarginField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorMarginField.ClientID">
+            <summary>
+            客户号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorMarginField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorMarginField.InstrumentID">
+            <summary>
+            合约代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorMarginField.ProductID">
+            <summary>
+            品种代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorMarginField.LongMarginRate">
+            <summary>
+            多头占用保证金按比例
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorMarginField.LongMarginAmt">
+            <summary>
+            多头保证金按手数
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorMarginField.ShortMarginRate">
+            <summary>
+            空头占用保证金按比例
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorMarginField.ShortMarginAmt">
+            <summary>
+            空头保证金按手数
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcTradeField">
+            <summary>
+            成交
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcTradeField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcTradeField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcTradeField.TradingDay">
+            <summary>
+            交易日
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcTradeField.ParticipantID">
+            <summary>
+            会员编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcTradeField.SeatID">
+            <summary>
+            下单席位号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcTradeField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcTradeField.ClientID">
+            <summary>
+            客户号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcTradeField.UserID">
+            <summary>
+            用户编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcTradeField.OrderUserID">
+            <summary>
+            下单用户编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcTradeField.TradeID">
+            <summary>
+            成交编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcTradeField.OrderSysID">
+            <summary>
+            报单编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcTradeField.UserOrderLocalID">
+            <summary>
+            本地报单编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcTradeField.InstrumentID">
+            <summary>
+            合约代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcTradeField.Direction">
+            <summary>
+            买卖方向
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcTradeField.OffsetFlag">
+            <summary>
+            开平标志
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcTradeField.HedgeFlag">
+            <summary>
+            投机套保标志
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcTradeField.TradePrice">
+            <summary>
+            成交价格
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcTradeField.TradeVolume">
+            <summary>
+            成交数量
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcTradeField.TradeTime">
+            <summary>
+            成交时间
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcTradeField.ClearingPartID">
+            <summary>
+            清算会员编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcTradeField.UsedFee">
+            <summary>
+            本次成交手续费
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcTradeField.UsedMargin">
+            <summary>
+            本次成交占用保证金
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcTradeField.Premium">
+            <summary>
+            本次成交占用权利金
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcTradeField.Position">
+            <summary>
+            持仓表今持仓量
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcTradeField.PositionCost">
+            <summary>
+            持仓表今日持仓成本
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcTradeField.Available">
+            <summary>
+            资金表可用资金
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcTradeField.Margin">
+            <summary>
+            资金表占用保证金
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcTradeField.FrozenMargin">
+            <summary>
+            资金表冻结的保证金
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcOrderField">
+            <summary>
+            报单
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.OrderSysID">
+            <summary>
+            系统报单编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.UserID">
+            <summary>
+            用户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.SeatNo">
+            <summary>
+            指定通过此席位序号下单
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.InstrumentID">
+            <summary>
+            合约代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.UserOrderLocalID">
+            <summary>
+            用户本地报单号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.OrderPriceType">
+            <summary>
+            报单类型
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.Direction">
+            <summary>
+            买卖方向
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.OffsetFlag">
+            <summary>
+            开平标志
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.HedgeFlag">
+            <summary>
+            投机套保标志
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.LimitPrice">
+            <summary>
+            价格
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.Volume">
+            <summary>
+            数量
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.TimeCondition">
+            <summary>
+            有效期类型
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.GTDDate">
+            <summary>
+            GTD日期
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.VolumeCondition">
+            <summary>
+            成交量类型
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.MinVolume">
+            <summary>
+            最小成交量
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.StopPrice">
+            <summary>
+            止损价
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.ForceCloseReason">
+            <summary>
+            强平原因
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.IsAutoSuspend">
+            <summary>
+            自动挂起标志
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.BusinessUnit">
+            <summary>
+            业务单元
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.UserCustom">
+            <summary>
+            用户自定义域
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.TradingDay">
+            <summary>
+            交易日
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.ParticipantID">
+            <summary>
+            会员编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.OrderUserID">
+            <summary>
+            最初下单用户编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.ClientID">
+            <summary>
+            客户号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.SeatID">
+            <summary>
+            下单席位号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.InsertTime">
+            <summary>
+            插入时间
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.OrderLocalID">
+            <summary>
+            本地报单编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.OrderSource">
+            <summary>
+            报单来源
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.OrderStatus">
+            <summary>
+            报单状态
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.CancelTime">
+            <summary>
+            撤销时间
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.CancelUserID">
+            <summary>
+            撤单用户编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.VolumeTraded">
+            <summary>
+            今成交数量
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcOrderField.VolumeRemain">
+            <summary>
+            剩余数量
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcFlowMessageCancelField">
+            <summary>
+            数据流回退
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcFlowMessageCancelField.SequenceSeries">
+            <summary>
+            序列系列号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcFlowMessageCancelField.TradingDay">
+            <summary>
+            交易日
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcFlowMessageCancelField.DataCenterID">
+            <summary>
+            数据中心代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcFlowMessageCancelField.StartSequenceNo">
+            <summary>
+            回退起始序列号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcFlowMessageCancelField.EndSequenceNo">
+            <summary>
+            回退结束序列号
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcDisseminationField">
+            <summary>
+            信息分发
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDisseminationField.SequenceSeries">
+            <summary>
+            序列系列号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDisseminationField.SequenceNo">
+            <summary>
+            序列号
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcInvestorAccountDepositResField">
+            <summary>
+            出入金结果
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorAccountDepositResField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorAccountDepositResField.UserID">
+            <summary>
+            用户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorAccountDepositResField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorAccountDepositResField.AccountID">
+            <summary>
+            资金帐号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorAccountDepositResField.AccountSeqNo">
+            <summary>
+            资金流水号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorAccountDepositResField.Amount">
+            <summary>
+            金额
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorAccountDepositResField.AmountDirection">
+            <summary>
+            出入金方向
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorAccountDepositResField.Available">
+            <summary>
+            可用资金
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInvestorAccountDepositResField.Balance">
+            <summary>
+            结算准备金
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcInputQuoteField">
+            <summary>
+            报价录入
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputQuoteField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputQuoteField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputQuoteField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputQuoteField.UserID">
+            <summary>
+            用户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputQuoteField.InstrumentID">
+            <summary>
+            合约代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputQuoteField.QuoteSysID">
+            <summary>
+            交易系统返回的系统报价编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputQuoteField.UserQuoteLocalID">
+            <summary>
+            用户设定的本地报价编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputQuoteField.QuoteLocalID">
+            <summary>
+            飞马向交易系统报的本地报价编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputQuoteField.BidVolume">
+            <summary>
+            买方买入数量
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputQuoteField.BidOffsetFlag">
+            <summary>
+            买方开平标志
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputQuoteField.BidHedgeFlag">
+            <summary>
+            买方投机套保标志
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputQuoteField.BidPrice">
+            <summary>
+            买方买入价格
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputQuoteField.AskVolume">
+            <summary>
+            卖方卖出数量
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputQuoteField.AskOffsetFlag">
+            <summary>
+            卖方开平标志
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputQuoteField.AskHedgeFlag">
+            <summary>
+            卖方投机套保标志
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputQuoteField.AskPrice">
+            <summary>
+            卖方卖出价格
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputQuoteField.BusinessUnit">
+            <summary>
+            业务单元
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputQuoteField.UserCustom">
+            <summary>
+            用户自定义域
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputQuoteField.BidUserOrderLocalID">
+            <summary>
+            拆分出来的买方用户本地报单编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputQuoteField.AskUserOrderLocalID">
+            <summary>
+            拆分出来的卖方用户本地报单编号
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcRtnQuoteField">
+            <summary>
+            报价通知
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRtnQuoteField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRtnQuoteField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRtnQuoteField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRtnQuoteField.UserID">
+            <summary>
+            用户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRtnQuoteField.InstrumentID">
+            <summary>
+            合约代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRtnQuoteField.QuoteSysID">
+            <summary>
+            交易系统返回的系统报价编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRtnQuoteField.UserQuoteLocalID">
+            <summary>
+            用户设定的本地报价编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRtnQuoteField.QuoteLocalID">
+            <summary>
+            飞马向交易系统报的本地报价编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRtnQuoteField.BidVolume">
+            <summary>
+            买方买入数量
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRtnQuoteField.BidOffsetFlag">
+            <summary>
+            买方开平标志
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRtnQuoteField.BidHedgeFlag">
+            <summary>
+            买方投机套保标志
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRtnQuoteField.BidPrice">
+            <summary>
+            买方买入价格
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRtnQuoteField.AskVolume">
+            <summary>
+            卖方卖出数量
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRtnQuoteField.AskOffsetFlag">
+            <summary>
+            卖方开平标志
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRtnQuoteField.AskHedgeFlag">
+            <summary>
+            卖方投机套保标志
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRtnQuoteField.AskPrice">
+            <summary>
+            卖方卖出价格
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRtnQuoteField.BusinessUnit">
+            <summary>
+            业务单元
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRtnQuoteField.UserCustom">
+            <summary>
+            用户自定义域
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRtnQuoteField.BidUserOrderLocalID">
+            <summary>
+            拆分出来的买方用户本地报单编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRtnQuoteField.AskUserOrderLocalID">
+            <summary>
+            拆分出来的卖方用户本地报单编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRtnQuoteField.BidOrderSysID">
+            <summary>
+            买方系统报单编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRtnQuoteField.AskOrderSysID">
+            <summary>
+            卖方系统报单编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRtnQuoteField.QuoteStatus">
+            <summary>
+            报价单状态
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRtnQuoteField.InsertTime">
+            <summary>
+            插入时间
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRtnQuoteField.CancelTime">
+            <summary>
+            撤销时间
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRtnQuoteField.TradeTime">
+            <summary>
+            成交时间
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcQuoteActionField">
+            <summary>
+            报价操作
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQuoteActionField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQuoteActionField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQuoteActionField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQuoteActionField.UserID">
+            <summary>
+            用户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQuoteActionField.QuoteSysID">
+            <summary>
+            交易系统返回的系统报价编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQuoteActionField.UserQuoteLocalID">
+            <summary>
+            用户设定的被撤的本地报价编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQuoteActionField.UserQuoteActionLocalID">
+            <summary>
+            用户向飞马报的本地撤消报价编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQuoteActionField.ActionFlag">
+            <summary>
+            报单操作标志
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQuoteActionField.BusinessUnit">
+            <summary>
+            业务单元
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQuoteActionField.UserCustom">
+            <summary>
+            用户自定义域
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcReqForQuoteField">
+            <summary>
+            询价请求
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcReqForQuoteField.ReqForQuoteID">
+            <summary>
+            询价编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcReqForQuoteField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcReqForQuoteField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcReqForQuoteField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcReqForQuoteField.UserID">
+            <summary>
+            用户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcReqForQuoteField.InstrumentID">
+            <summary>
+            合约代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcReqForQuoteField.TradingDay">
+            <summary>
+            交易日
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcReqForQuoteField.ReqForQuoteTime">
+            <summary>
+            询价时间
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcMarketDataBaseField">
+            <summary>
+            行情基础属性
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataBaseField.TradingDay">
+            <summary>
+            交易日
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataBaseField.SettlementGroupID">
+            <summary>
+            结算组代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataBaseField.SettlementID">
+            <summary>
+            结算编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataBaseField.PreSettlementPrice">
+            <summary>
+            昨结算
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataBaseField.PreClosePrice">
+            <summary>
+            昨收盘
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataBaseField.PreOpenInterest">
+            <summary>
+            昨持仓量
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataBaseField.PreDelta">
+            <summary>
+            昨虚实度
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcMarketDataStaticField">
+            <summary>
+            行情静态属性
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataStaticField.OpenPrice">
+            <summary>
+            今开盘
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataStaticField.HighestPrice">
+            <summary>
+            最高价
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataStaticField.LowestPrice">
+            <summary>
+            最低价
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataStaticField.ClosePrice">
+            <summary>
+            今收盘
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataStaticField.UpperLimitPrice">
+            <summary>
+            涨停板价
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataStaticField.LowerLimitPrice">
+            <summary>
+            跌停板价
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataStaticField.SettlementPrice">
+            <summary>
+            今结算
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataStaticField.CurrDelta">
+            <summary>
+            今虚实度
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcMarketDataLastMatchField">
+            <summary>
+            行情最新成交属性
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataLastMatchField.LastPrice">
+            <summary>
+            最新价
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataLastMatchField.Volume">
+            <summary>
+            数量
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataLastMatchField.Turnover">
+            <summary>
+            成交金额
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataLastMatchField.OpenInterest">
+            <summary>
+            持仓量
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcMarketDataBestPriceField">
+            <summary>
+            行情最优价属性
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataBestPriceField.BidPrice1">
+            <summary>
+            申买价一
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataBestPriceField.BidVolume1">
+            <summary>
+            申买量一
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataBestPriceField.AskPrice1">
+            <summary>
+            申卖价一
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataBestPriceField.AskVolume1">
+            <summary>
+            申卖量一
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcMarketDataBid23Field">
+            <summary>
+            行情申买二、三属性
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataBid23Field.BidPrice2">
+            <summary>
+            申买价二
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataBid23Field.BidVolume2">
+            <summary>
+            申买量二
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataBid23Field.BidPrice3">
+            <summary>
+            申买价三
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataBid23Field.BidVolume3">
+            <summary>
+            申买量三
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcMarketDataAsk23Field">
+            <summary>
+            行情申卖二、三属性
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataAsk23Field.AskPrice2">
+            <summary>
+            申卖价二
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataAsk23Field.AskVolume2">
+            <summary>
+            申卖量二
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataAsk23Field.AskPrice3">
+            <summary>
+            申卖价三
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataAsk23Field.AskVolume3">
+            <summary>
+            申卖量三
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcMarketDataBid45Field">
+            <summary>
+            行情申买四、五属性
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataBid45Field.BidPrice4">
+            <summary>
+            申买价四
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataBid45Field.BidVolume4">
+            <summary>
+            申买量四
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataBid45Field.BidPrice5">
+            <summary>
+            申买价五
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataBid45Field.BidVolume5">
+            <summary>
+            申买量五
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcMarketDataAsk45Field">
+            <summary>
+            行情申卖四、五属性
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataAsk45Field.AskPrice4">
+            <summary>
+            申卖价四
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataAsk45Field.AskVolume4">
+            <summary>
+            申卖量四
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataAsk45Field.AskPrice5">
+            <summary>
+            申卖价五
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataAsk45Field.AskVolume5">
+            <summary>
+            申卖量五
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcMarketDataUpdateTimeField">
+            <summary>
+            行情更新时间属性
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataUpdateTimeField.InstrumentID">
+            <summary>
+            合约代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataUpdateTimeField.UpdateTime">
+            <summary>
+            最后修改时间
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarketDataUpdateTimeField.UpdateMillisec">
+            <summary>
+            最后修改毫秒
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcDepthMarketDataField">
+            <summary>
+            深度行情
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.TradingDay">
+            <summary>
+            交易日
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.SettlementGroupID">
+            <summary>
+            结算组代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.SettlementID">
+            <summary>
+            结算编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.PreSettlementPrice">
+            <summary>
+            昨结算
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.PreClosePrice">
+            <summary>
+            昨收盘
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.PreOpenInterest">
+            <summary>
+            昨持仓量
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.PreDelta">
+            <summary>
+            昨虚实度
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.OpenPrice">
+            <summary>
+            今开盘
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.HighestPrice">
+            <summary>
+            最高价
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.LowestPrice">
+            <summary>
+            最低价
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.ClosePrice">
+            <summary>
+            今收盘
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.UpperLimitPrice">
+            <summary>
+            涨停板价
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.LowerLimitPrice">
+            <summary>
+            跌停板价
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.SettlementPrice">
+            <summary>
+            今结算
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.CurrDelta">
+            <summary>
+            今虚实度
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.LastPrice">
+            <summary>
+            最新价
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.Volume">
+            <summary>
+            数量
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.Turnover">
+            <summary>
+            成交金额
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.OpenInterest">
+            <summary>
+            持仓量
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.BidPrice1">
+            <summary>
+            申买价一
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.BidVolume1">
+            <summary>
+            申买量一
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.AskPrice1">
+            <summary>
+            申卖价一
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.AskVolume1">
+            <summary>
+            申卖量一
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.BidPrice2">
+            <summary>
+            申买价二
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.BidVolume2">
+            <summary>
+            申买量二
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.BidPrice3">
+            <summary>
+            申买价三
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.BidVolume3">
+            <summary>
+            申买量三
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.AskPrice2">
+            <summary>
+            申卖价二
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.AskVolume2">
+            <summary>
+            申卖量二
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.AskPrice3">
+            <summary>
+            申卖价三
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.AskVolume3">
+            <summary>
+            申卖量三
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.BidPrice4">
+            <summary>
+            申买价四
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.BidVolume4">
+            <summary>
+            申买量四
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.BidPrice5">
+            <summary>
+            申买价五
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.BidVolume5">
+            <summary>
+            申买量五
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.AskPrice4">
+            <summary>
+            申卖价四
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.AskVolume4">
+            <summary>
+            申卖量四
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.AskPrice5">
+            <summary>
+            申卖价五
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.AskVolume5">
+            <summary>
+            申卖量五
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.InstrumentID">
+            <summary>
+            合约代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.UpdateTime">
+            <summary>
+            最后修改时间
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcDepthMarketDataField.UpdateMillisec">
+            <summary>
+            最后修改毫秒
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcSpecificInstrumentField">
+            <summary>
+            订阅合约的相关信息
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcSpecificInstrumentField.InstrumentID">
+            <summary>
+            合约代码
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcInputMarginCombActionField">
+            <summary>
+            申请组合
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputMarginCombActionField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputMarginCombActionField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputMarginCombActionField.UserID">
+            <summary>
+            交易用户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputMarginCombActionField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputMarginCombActionField.HedgeFlag">
+            <summary>
+            投机套保标志
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputMarginCombActionField.UserActionLocalID">
+            <summary>
+            用户本地编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputMarginCombActionField.CombInstrumentID">
+            <summary>
+            组合合约代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputMarginCombActionField.CombVolume">
+            <summary>
+            组合数量
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputMarginCombActionField.CombDirection">
+            <summary>
+            组合动作方向
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcInputMarginCombActionField.ActionLocalID">
+            <summary>
+            本地编号
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcQryInvestorCombPositionField">
+            <summary>
+            交易编码组合持仓查询
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInvestorCombPositionField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInvestorCombPositionField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInvestorCombPositionField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInvestorCombPositionField.HedgeFlag">
+            <summary>
+            投机套保标志
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInvestorCombPositionField.CombInstrumentID">
+            <summary>
+            组合合约代码
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcRspInvestorCombPositionField">
+            <summary>
+            交易编码组合持仓查询应答
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorCombPositionField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorCombPositionField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorCombPositionField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorCombPositionField.HedgeFlag">
+            <summary>
+            投机套保标志
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorCombPositionField.ClientID">
+            <summary>
+            客户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorCombPositionField.CombInstrumentID">
+            <summary>
+            组合合约代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorCombPositionField.CombPosition">
+            <summary>
+            组合持仓
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorCombPositionField.CombFrozenPosition">
+            <summary>
+            冻结组合持仓
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorCombPositionField.CombFreeMargin">
+            <summary>
+            组合一手释放的保证金
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcMarginCombinationLegField">
+            <summary>
+            组合规则
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarginCombinationLegField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarginCombinationLegField.CombInstrumentID">
+            <summary>
+            组合合约代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarginCombinationLegField.LegID">
+            <summary>
+            单腿编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarginCombinationLegField.LegInstrumentID">
+            <summary>
+            单腿合约代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarginCombinationLegField.Direction">
+            <summary>
+            买卖方向
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarginCombinationLegField.LegMultiple">
+            <summary>
+            单腿乘数
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcMarginCombinationLegField.Priority">
+            <summary>
+            优先级
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcQryInvestorLegPositionField">
+            <summary>
+            交易编码单腿持仓查询
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInvestorLegPositionField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInvestorLegPositionField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInvestorLegPositionField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInvestorLegPositionField.HedgeFlag">
+            <summary>
+            投机套保标志
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcQryInvestorLegPositionField.LegInstrumentID">
+            <summary>
+            单腿合约代码
+            </summary>
+        </member>
+        <member name="T:Femas.ThostFtdcRspInvestorLegPositionField">
+            <summary>
+            交易编码单腿持仓查询应答
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorLegPositionField.BrokerID">
+            <summary>
+            经纪公司编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorLegPositionField.ExchangeID">
+            <summary>
+            交易所代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorLegPositionField.InvestorID">
+            <summary>
+            投资者编号
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorLegPositionField.HedgeFlag">
+            <summary>
+            投机套保标志
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorLegPositionField.ClientID">
+            <summary>
+            客户代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorLegPositionField.InstrumentID">
+            <summary>
+            单腿合约代码
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorLegPositionField.LongPosition">
+            <summary>
+            多头持仓
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorLegPositionField.ShortPosition">
+            <summary>
+            空头持仓
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorLegPositionField.LongMargin">
+            <summary>
+            多头占用保证金
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorLegPositionField.ShortMargin">
+            <summary>
+            空头占用保证金
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorLegPositionField.LongFrozenPosition">
+            <summary>
+            多头冻结持仓
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorLegPositionField.ShortFrozenPosition">
+            <summary>
+            空头冻结持仓
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorLegPositionField.LongFrozenMargin">
+            <summary>
+            多头冻结保证金
+            </summary>
+        </member>
+        <member name="F:Femas.ThostFtdcRspInvestorLegPositionField.ShortFrozenMargin">
+            <summary>
+            空头冻结保证金
+            </summary>
+        </member>
+        <member name="T:Femas.FtdcTdAdapter">
+            <summary>
+            交易接口
+            </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.#ctor(System.String)">
+             <summary>
+            创建TraderApi
+            @param pszFlowPath 存贮订阅信息文件的目录，默认为当前目录
+            @return 创建出的UserApi
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.GetVersion(System.Int32@,System.Int32@)">
+             <summary>
+            获取系统版本号
+            @param nMajorVersion 主版本号
+            @param nMinorVersion 子版本号
+            @return 系统标识字符串
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.Release">
+             <summary>
+            删除接口对象本身
+            @remark 不再使用本接口对象时,调用该函数删除接口对象
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.Init">
+             <summary>
+            初始化
+            @remark 初始化运行环境,只有调用后,接口才开始工作
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.GetTradingDay">
+             <summary>
+            获取当前交易日
+            @retrun 获取到的交易日
+            @remark 只有登录成功后,才能得到正确的交易日
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.RegisterFront(System.String)">
+             <summary>
+            注册前置机网络地址
+            @param pszFrontAddress：前置机网络地址。
+            @remark 网络地址的格式为：“protocol://ipaddress:port”，如：”tcp://127.0.0.1:17001”。
+            @remark “tcp”代表传输协议，“127.0.0.1”代表服务器地址。”17001”代表服务器端口号。
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.RegisterNameServer(System.String)">
+             <summary>
+            注册名字服务器网络地址
+            @param pszNsAddress：名字服务器网络地址。
+            @remark 网络地址的格式为：“protocol://ipaddress:port”，如：”tcp://127.0.0.1:12001”。
+            @remark “tcp”代表传输协议，“127.0.0.1”代表服务器地址。”12001”代表服务器端口号。
+            @remark RegisterFront优先于RegisterNameServer
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.RegisterCertificateFile(System.String,System.String,System.String,System.String)">
+             <summary>
+            加载证书
+            @param pszCertFileName 用户证书文件名
+            @param pszKeyFileName 用户私钥文件名
+            @param pszCaFileName 可信任CA证书文件名
+            @param pszKeyFilePassword 用户私钥文件密码
+            @return 0 操作成功
+            @return -1 可信任CA证书载入失败
+            @return -2 用户证书载入失败
+            @return -3 用户私钥载入失败
+            @return -4 用户证书校验失败
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.SubscribePrivateTopic(Femas.EnumTeResumeType)">
+             <summary>
+            订阅私有流。
+            @param nResumeType 私有流重传方式
+                    USTP_TERT_RESTART:从本交易日开始重传
+                    USTP_TERT_RESUME:从上次收到的续传
+                    USTP_TERT_QUICK:只传送登录后私有流的内容
+            @remark 该方法要在Init方法前调用。若不调用则不会收到私有流的数据。
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.SubscribePublicTopic(Femas.EnumTeResumeType)">
+             <summary>
+            订阅公共流。
+            @param nResumeType 公共流重传方式
+                    USTP_TERT_RESTART:从本交易日开始重传
+                    USTP_TERT_RESUME:从上次收到的续传
+                    USTP_TERT_QUICK:只传送登录后公共流的内容
+            @remark 该方法要在Init方法前调用。若不调用则不会收到公共流的数据。
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.SubscribeUserTopic(Femas.EnumTeResumeType)">
+             <summary>
+            订阅交易员流。
+            @param nResumeType 交易员流重传方式
+                    USTP_TERT_RESTART:从本交易日开始重传
+                    USTP_TERT_RESUME:从上次收到的续传
+                    USTP_TERT_QUICK:只传送登录后交易员流的内容
+            @remark 该方法要在Init方法前调用。若不调用则不会收到交易员流的数据。
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.SubscribeForQuote(Femas.EnumTeResumeType)">
+             <summary>
+            订阅询价流。
+            @param nResumeType 交易员流重传方式
+                    USTP_TERT_RESTART:从本交易日开始重传
+                    USTP_TERT_RESUME:从上次收到的续传
+                    USTP_TERT_QUICK:只传送登录后交易员流的内容
+            @remark 该方法要在Init方法前调用。若不调用则不会收到交易员流的数据。
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.SetHeartbeatTimeout(System.UInt32)">
+             <summary>
+            设置心跳超时时间。
+            @param timeout 心跳超时时间(秒)
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.OpenRequestLog(System.String)">
+             <summary>
+            打开请求日志文件
+            @param pszReqLogFileName 请求日志文件名
+            @return 0 操作成功
+            @return -1 打开日志文件失败
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.OpenResponseLog(System.String)">
+             <summary>
+            打开应答日志文件
+            @param pszRspLogFileName 应答日志文件名
+            @return 0 操作成功
+            @return -1 打开日志文件失败
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.ReqUserLogin(Femas.ThostFtdcReqUserLoginField,System.Int32)">
+             <summary>
+            风控前置系统用户登录请求
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.ReqUserLogout(Femas.ThostFtdcReqUserLogoutField,System.Int32)">
+             <summary>
+            用户退出请求
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.ReqUserPasswordUpdate(Femas.ThostFtdcUserPasswordUpdateField,System.Int32)">
+             <summary>
+            用户密码修改请求
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.ReqOrderInsert(Femas.ThostFtdcInputOrderField,System.Int32)">
+             <summary>
+            报单录入请求
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.ReqOrderAction(Femas.ThostFtdcOrderActionField,System.Int32)">
+             <summary>
+            报单操作请求
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.ReqQuoteInsert(Femas.ThostFtdcInputQuoteField,System.Int32)">
+             <summary>
+            请求报价录入
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.ReqQuoteAction(Femas.ThostFtdcQuoteActionField,System.Int32)">
+             <summary>
+            报价操作请求
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.ReqForQuote(Femas.ThostFtdcReqForQuoteField,System.Int32)">
+             <summary>
+            客户询价请求
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.ReqMarginCombAction(Femas.ThostFtdcInputMarginCombActionField,System.Int32)">
+             <summary>
+            客户申请组合请求
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.ReqUserDeposit(Femas.ThostFtdcstpUserDepositField,System.Int32)">
+             <summary>
+            用户请求出入金
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.ReqTransferMoney(Femas.ThostFtdcstpTransferMoneyField,System.Int32)">
+             <summary>
+            用户主次席出入金
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.ReqQryOrder(Femas.ThostFtdcQryOrderField,System.Int32)">
+             <summary>
+            报单查询请求
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.ReqQryTrade(Femas.ThostFtdcQryTradeField,System.Int32)">
+             <summary>
+            成交单查询请求
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.ReqQryUserInvestor(Femas.ThostFtdcQryUserInvestorField,System.Int32)">
+             <summary>
+            可用投资者账户查询请求
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.ReqQryTradingCode(Femas.ThostFtdcQryTradingCodeField,System.Int32)">
+             <summary>
+            交易编码查询请求
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.ReqQryInvestorAccount(Femas.ThostFtdcQryInvestorAccountField,System.Int32)">
+             <summary>
+            投资者资金账户查询请求
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.ReqQryInstrument(Femas.ThostFtdcQryInstrumentField,System.Int32)">
+             <summary>
+            合约查询请求
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.ReqQryExchange(Femas.ThostFtdcQryExchangeField,System.Int32)">
+             <summary>
+            交易所查询请求
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.ReqQryInvestorPosition(Femas.ThostFtdcQryInvestorPositionField,System.Int32)">
+             <summary>
+            投资者持仓查询请求
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.ReqSubscribeTopic(Femas.ThostFtdcDisseminationField,System.Int32)">
+             <summary>
+            订阅主题请求
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.ReqQryComplianceParam(Femas.ThostFtdcQryComplianceParamField,System.Int32)">
+             <summary>
+            合规参数查询请求
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.ReqQryTopic(Femas.ThostFtdcDisseminationField,System.Int32)">
+             <summary>
+            主题查询请求
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.ReqQryInvestorFee(Femas.ThostFtdcQryInvestorFeeField,System.Int32)">
+             <summary>
+            投资者手续费率查询请求
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.ReqQryInvestorMargin(Femas.ThostFtdcQryInvestorMarginField,System.Int32)">
+             <summary>
+            投资者保证金率查询请求
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.ReqQryInvestorCombPosition(Femas.ThostFtdcQryInvestorCombPositionField,System.Int32)">
+             <summary>
+            交易编码组合持仓查询请求
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.ReqQryInvestorLegPosition(Femas.ThostFtdcQryInvestorLegPositionField,System.Int32)">
+             <summary>
+            交易编码单腿持仓查询请求
+             </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.CbOnErrRtnFunc(System.IntPtr,Femas.EnumOnErrRtnType,System.IntPtr,Femas.ThostFtdcRspInfoField)">
+            <summary>
+            处理所有的OnErrRtn****回调事件
+            </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.CbOnFrontFunc(System.IntPtr,Femas.EnumOnFrontType,System.Int32)">
+            <summary>
+            处理所有的OnFront****回调事件
+            </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.CbOnPackageFunc(System.IntPtr,Femas.EnumOnPackageType,System.Int32,System.Int32)">
+            <summary>
+            处理所有的OnPackage****回调事件
+            </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.CbOnRspFunc(System.IntPtr,Femas.EnumOnRspType,System.IntPtr,Femas.ThostFtdcRspInfoField,System.Int32,System.Boolean)">
+            <summary>
+            处理所有的OnRsp****回调事件
+            </summary>
+        </member>
+        <member name="M:Femas.FtdcTdAdapter.CbOnRtnFunc(System.IntPtr,Femas.EnumOnRtnType,System.IntPtr)">
+            <summary>
+            处理所有的OnRtn****回调事件
+            </summary>
+        </member>
+        <member name="P:Femas.FtdcTdAdapter.Handle">
+            <summary>
+            Native Object Pointer
+            </summary>
+        </member>
+        <member name="E:Femas.FtdcTdAdapter.OnErrRtnEvent">
+            <summary>
+            处理所有的OnErrRtn****回调事件
+            </summary>
+        </member>
+        <member name="E:Femas.FtdcTdAdapter.OnFrontEvent">
+            <summary>
+            处理所有的OnFront****回调事件
+            </summary>
+        </member>
+        <member name="E:Femas.FtdcTdAdapter.OnPackageEvent">
+            <summary>
+            处理所有的OnPackage****回调事件
+            </summary>
+        </member>
+        <member name="E:Femas.FtdcTdAdapter.OnRspEvent">
+            <summary>
+            处理所有的OnRsp****回调事件
+            </summary>
+        </member>
+        <member name="E:Femas.FtdcTdAdapter.OnRtnEvent">
+            <summary>
+            处理所有的OnRtn****回调事件
+            </summary>
+        </member>
+    </members>
+</doc>
