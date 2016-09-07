@@ -1,4 +1,4 @@
-## FtdcNet.CTP
+## FtdcNet.Femas
 
 .Net wrapper for [ftdc2c_femas](http://github.com/shawn666liu/ftdc2c_femas).
 
